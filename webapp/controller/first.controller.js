@@ -8,6 +8,7 @@ sap.ui.define([
         onInit() {
         },
         onGenerateTDS: function() {
+            MessageToast.show("generate tds");
             const codeInput = this.getView().byId("codeInput").getValue();
             const outputField = this.getView().byId("tdsOutput");
       
@@ -42,6 +43,7 @@ sap.ui.define([
           },
       
           onDownload: function() {
+            MessageToast.show("exporting into word");
             const text = this.getView().byId("tdsOutput").getValue();
             const blob = new Blob([text], { type: "application/msword" });
             const link = document.createElement("a");
