@@ -48,6 +48,7 @@ sap.ui.define([
             link.href = URL.createObjectURL(blob);
             link.download = "TDS.doc";
             link.click();
-          }      
+          },
+            
     });
 });
