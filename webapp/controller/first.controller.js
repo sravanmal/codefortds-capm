@@ -7,18 +7,20 @@ sap.ui.define([
     return Controller.extend("sravan.ust.tdsapp.controller.first", {
         onInit() {
         },
-        onGenerateTDS: function() {
-            MessageToast.show("generate tds");
+        onGenerateFDS: function() {
+            MessageToast.show("generate fds");
             const codeInput = this.getView().byId("codeInput").getValue();
-            const outputField = this.getView().byId("tdsOutput");
-      
+            const outputField = this.getView().byId("fdsOutput");
+            const buttondownload = this.getView().byId("_IDGenButton1");
+          
+            buttondownload.setEnabled(false);
             if (!codeInput) {
               MessageToast.show("Please enter some code first.");
               return;
             }
             
             // Show loading message
-            outputField.setValue("Generating TDS...");
+            outputField.setValue("Generating FDS...");
       
             // Call backend API
             $.ajax({
@@ -32,6 +34,7 @@ sap.ui.define([
                   // Handle successful response (e.g., display data in UI)
                   console.log("Success: ", data);
                   outputField.setValue(data.data);
+                  buttondownload.setEnabled(true);
                 },
                 error: function(xhr, status, error) {
                   // Handle error
@@ -44,11 +47,11 @@ sap.ui.define([
       
           onDownload: function() {
             MessageToast.show("exporting into word");
-            const text = this.getView().byId("tdsOutput").getValue();
+            const text = this.getView().byId("fdsOutput").getValue();
             const blob = new Blob([text], { type: "application/msword" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "TDS.doc";
+            link.download = "FDS.doc";
             link.click();
           },
             
